@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevRamp - Onboard Devs Like a Boss</title>
+    <!-- <script src="https://cdn.tailwindcss.com"></script> -->
+    <link href="output.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
+        
+        body { 
+            font-family: 'Space Grotesk', sans-serif; 
+            background: #0a0a0f;
+            color: #ffffff;
+        }
+        
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3), 0 0 40px rgba(0, 255, 255, 0.1);
+        }
+        
+        .terminal-bg {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f0f23 100%);
+            border: 1px solid #00ffff;
+        }
+        
+        .cyber-gradient {
+            background: linear-gradient(45deg, #ff00ff, #00ffff, #ffff00, #ff00ff);
+            background-size: 400% 400%;
+            animation: gradientShift 4s ease infinite;
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .float-animation {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .glitch {
+            position: relative;
+            color: #00ffff;
+        }
+        
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .glitch::before {
+            animation: glitch-1 0.5s infinite;
+            color: #ff00ff;
+            z-index: -1;
+        }
+        
+        .glitch::after {
+            animation: glitch-2 0.5s infinite;
+            color: #ffff00;
+            z-index: -2;
+        }
+        
+        @keyframes glitch-1 {
+            0%, 14%, 15%, 49%, 50%, 99%, 100% { transform: translate(0); }
+            15% { transform: translate(-2px, 0); }
+            50% { transform: translate(2px, 0); }
+        }
+        
+        @keyframes glitch-2 {
+            0%, 20%, 21%, 62%, 63%, 99%, 100% { transform: translate(0); }
+            21% { transform: translate(2px, 0); }
+            63% { transform: translate(-2px, 0); }
+        }
+        
+        .matrix-bg {
+            background: 
+                linear-gradient(90deg, transparent 79px, #00ff00 79px, #00ff00 81px, transparent 81px),
+                linear-gradient(#0a0a0f 0px, #0a0a0f 79px, #001100 79px, #001100 81px, #0a0a0f 81px);
+            background-size: 82px 82px;
+            opacity: 0.1;
+        }
+        
+        .code-block {
+            background: #1a1a2e;
+            border: 1px solid #00ffff;
+            border-radius: 8px;
+            padding: 1rem;
+            overflow-x: auto;
+        }
+        
+        .typing-animation {
+            border-right: 2px solid #00ffff;
+            animation: typing 2s steps(20, end), blink 1s infinite;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink {
+            0%, 50% { border-color: #00ffff; }
+            51%, 100% { border-color: transparent; }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-white overflow-x-hidden">
+    <!-- Matrix Background -->
+    <div class="matrix-bg fixed inset-0 pointer-events-none"></div>
+    
+    <!-- Header -->
+    <header class="relative z-10 border-b border-cyan-500/30 bg-gray-900/80 backdrop-blur-sm">
+        <nav class="max-w-7xl mx-auto px-4 py-4">
+            <div class="flex justify-between items-center">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-lg flex items-center justify-center neon-glow">
+                        <span class="text-black font-bold text-xl mono">></span>
+                    </div>
+                    <span class="text-2xl font-bold mono text-cyan-400">DevRamp</span>
+                </div>
+                <button onclick="scrollToSignup()" class="bg-gradient-to-r from-purple-500 to-cyan-500 text-black px-6 py-2 rounded-lg font-semibold hover:shadow-lg transition-all neon-glow">
+                    sudo get-access
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="relative py-20 overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="mb-8">
+                <h1 class="text-6xl md:text-8xl font-bold mb-4">
+                    <span class="glitch" data-text="DevRamp">DevRamp</span>
+                </h1>
+                <div class="text-2xl md:text-3xl mono text-cyan-400 mb-6">
+                    <span class="typing-animation">onboard_devs --fast --smart</span>
+                </div>
+            </div>
+            
+            <p class="text-xl md:text-2xl text-gray-300 mb-8 max-w-4xl mx-auto">
+                🚀 Turn your 3-month developer onboarding nightmare into a 3-week productivity rocket ship
+            </p>
+            
+            <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
+                <button onclick="scrollToSignup()" class="cyber-gradient text-black px-8 py-4 rounded-lg text-lg font-bold hover:scale-105 transition-transform">
+                    🎯 Join the Beta
+                </button>
+                <button onclick="scrollToDemo()" class="border-2 border-cyan-400 text-cyan-400 px-8 py-4 rounded-lg text-lg font-semibold hover:bg-cyan-400 hover:text-black transition-colors">
+                    🤖 See the Magic
+                </button>
+            </div>
+            
+            <!-- Floating Code Blocks -->
+            <div class="grid md:grid-cols-3 gap-6 mt-16">
+                <div class="terminal-bg p-4 rounded-lg float-animation">
+                    <div class="mono text-sm text-green-400">
+                        <div class="text-cyan-400">$ analyze_codebase</div>
+                        <div>✓ Scanning 10,000 files...</div>
+                        <div>✓ Generating docs...</div>
+                        <div>🎉 Ready in 30 seconds</div>
+                    </div>
+                </div>
+                <div class="terminal-bg p-4 rounded-lg float-animation" style="animation-delay: 0.5s;">
+                    <div class="mono text-sm text-green-400">
+                        <div class="text-cyan-400">$ create_onboarding_path</div>
+                        <div>✓ Frontend developer detected</div>
+                        <div>✓ Custom path generated</div>
+                        <div>🚀 Time to productivity: 3 weeks</div>
+                    </div>
+                </div>
+                <div class="terminal-bg p-4 rounded-lg float-animation" style="animation-delay: 1s;">
+                    <div class="mono text-sm text-green-400">
+                        <div class="text-cyan-400">$ calculate_savings</div>
+                        <div>✓ Developer salary: $120k</div>
+                        <div>✓ Time saved: 6 weeks</div>
+                        <div>💰 ROI: $13,846</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Problem Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-4">
+                    <span class="text-red-400">The Onboarding</span> 
+                    <span class="text-cyan-400">Nightmare</span>
+                </h2>
+                <p class="text-xl text-gray-300 mono">// TODO: fix this mess</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="terminal-bg p-8 rounded-xl hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4">😴</div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-4 mono">sleep(90_days)</h3>
+                    <p class="text-gray-300">New devs spend 3 months just figuring out what the hell your code does</p>
+                </div>
+                
+                <div class="terminal-bg p-8 rounded-xl hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4">💸</div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-4 mono">burn_cash(150000)</h3>
+                    <p class="text-gray-300">Senior devs waste 30% of their time explaining basic stuff instead of shipping features</p>
+                </div>
+                
+                <div class="terminal-bg p-8 rounded-xl hover:scale-105 transition-transform">
+                    <div class="text-6xl mb-4">🤬</div>
+                    <h3 class="text-2xl font-bold text-red-400 mb-4 mono">rage_quit()</h3>
+                    <p class="text-gray-300">Everyone gets frustrated. New hires feel lost, senior devs feel interrupted</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Solution Section -->
+    <section id="demo" class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="text-center mb-16">
+                <h2 class="text-5xl font-bold mb-4">
+                    <span class="text-purple-400">Enter</span> 
+                    <span class="text-cyan-400">DevRamp</span>
+                </h2>
+                <p class="text-xl text-gray-300 mono">// AI-powered developer onboarding that doesn't suck</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="group hover:scale-105 transition-transform">
+                    <div class="terminal-bg p-8 rounded-xl border-2 border-transparent group-hover:border-cyan-400 transition-colors">
+                        <div class="text-6xl mb-4">🤖</div>
+                        <h3 class="text-2xl font-bold text-cyan-400 mb-4 mono">smart_docs()</h3>
+                        <p class="text-gray-300 mb-4">AI reads your spaghetti code and explains it like you're 5. Auto-generates docs, diagrams, and "how tf does this work" guides.</p>
+                        <div class="code-block mt-4">
+                            <div class="mono text-sm text-green-400">
+                                <div class="text-cyan-400">// Generated explanation:</div>
+                                <div>This function handles user auth</div>
+                                <div>and connects to the payment API</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group hover:scale-105 transition-transform">
+                    <div class="terminal-bg p-8 rounded-xl border-2 border-transparent group-hover:border-purple-400 transition-colors">
+                        <div class="text-6xl mb-4">🎯</div>
+                        <h3 class="text-2xl font-bold text-purple-400 mb-4 mono">custom_path()</h3>
+                        <p class="text-gray-300 mb-4">Personalized learning journeys. Frontend? Backend? Junior? Senior? We got you covered with the exact path you need.</p>
+                        <div class="code-block mt-4">
+                            <div class="mono text-sm text-green-400">
+                                <div class="text-purple-400">Week 1: Setup & basics</div>
+                                <div>Week 2: Core features</div>
+                                <div>Week 3: Ship your first PR</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="group hover:scale-105 transition-transform">
+                    <div class="terminal-bg p-8 rounded-xl border-2 border-transparent group-hover:border-yellow-400 transition-colors">
+                        <div class="text-6xl mb-4">🧠</div>
+                        <h3 class="text-2xl font-bold text-yellow-400 mb-4 mono">capture_knowledge()</h3>
+                        <p class="text-gray-300 mb-4">Captures all that tribal knowledge living in senior devs' heads. No more "ask Sarah, she knows how this works."</p>
+                        <div class="code-block mt-4">
+                            <div class="mono text-sm text-green-400">
+                                <div class="text-yellow-400">Expert: Sarah (Frontend)</div>
+                                <div>Available: 2-4pm EST</div>
+                                <div>Specialty: React hooks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="py-20 relative">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-12">
+                <span class="text-green-400">Results</span> 
+                <span class="text-cyan-400">That Slap</span>
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="terminal-bg p-8 rounded-xl neon-glow">
+                    <div class="text-6xl font-bold text-green-400 mb-2 mono">85%</div>
+                    <div class="text-gray-300 mono">faster to first meaningful commit</div>
+                </div>
+                <div class="terminal-bg p-8 rounded-xl neon-glow">
+                    <div class="text-6xl font-bold text-cyan-400 mb-2 mono">$120k</div>
+                    <div class="text-gray-300 mono">saved per developer hired</div>
+                </div>
+                <div class="terminal-bg p-8 rounded-xl neon-glow">
+                    <div class="text-6xl font-bold text-purple-400 mb-2 mono">92%</div>
+                    <div class="text-gray-300 mono">developer happiness score</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-5xl font-bold mb-8">
+                <span class="text-cyan-400">Pricing</span> 
+                <span class="text-white">That</span> 
+                <span class="text-green-400">Makes Sense</span>
+            </h2>
+            
+            <div class="terminal-bg p-12 rounded-2xl neon-glow">
+                <div class="text-7xl font-bold text-cyan-400 mb-4 mono">$75</div>
+                <div class="text-2xl mb-6 text-gray-300">per developer per month</div>
+                <div class="text-lg text-gray-400 mb-8 mono">
+                    // Pays for itself in 2 weeks of saved onboarding time
+                </div>
+                <button onclick="scrollToSignup()" class="cyber-gradient text-black px-12 py-4 rounded-lg text-xl font-bold hover:scale-105 transition-transform">
+                    🚀 Get Early Access
+                </button>
+                <div class="mt-6 text-sm text-gray-400 mono">
+                    Early birds get 50% off first year + free setup
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Email Signup -->
+    <section id="signup" class="py-20 relative">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-6xl font-bold mb-4">
+                <span class="glitch text-cyan-400" data-text="Ready to Ship?">Ready to Ship?</span>
+            </h2>
+            <p class="text-xl text-gray-300 mb-8 mono">Join 500+ engineering leaders in the beta queue</p>
+            
+            <form id="emailForm" class="max-w-md mx-auto">
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <input 
+                        type="email" 
+                        id="email"
+                        placeholder="dev@yourcompany.com" 
+                        required
+                        class="flex-1 px-6 py-4 bg-gray-900 border-2 border-cyan-400 rounded-lg text-white text-lg mono focus:outline-none focus:border-purple-400 transition-colors"
+                    >
+                    <button 
+                        type="submit"
+                        class="bg-gradient-to-r from-purple-500 to-cyan-500 text-black px-8 py-4 rounded-lg text-lg font-bold hover:scale-105 transition-transform neon-glow"
+                    >
+                        🎯 Join Beta
+                    </button>
+                </div>
+            </form>
+            
+            <div id="successMessage" class="hidden mt-6 p-4 bg-green-900 border-2 border-green-400 rounded-lg neon-glow">
+                <p class="font-bold text-green-400 mono">🎉 You're in the queue! Prepare for liftoff 🚀</p>
+            </div>
+            
+            <p class="text-sm text-gray-400 mt-6 mono">
+                // Early access = 50% off + free white-glove setup
+            </p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-cyan-500/30 bg-gray-900/80 backdrop-blur-sm py-12">
+        <div class="max-w-7xl mx-auto px-4 text-center">
+            <div class="flex items-center justify-center mb-6">
+                <div class="w-12 h-12 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-lg flex items-center justify-center neon-glow">
+                    <span class="text-black font-bold text-2xl mono">></span>
+                </div>
+                <span class="ml-3 text-3xl font-bold mono text-cyan-400">DevRamp</span>
+            </div>
+            <p class="text-gray-400 mono">&copy; 2025 DevRamp. Made with ❤️ and lots of ☕ by developers, for developers.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('emailForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+    
+            const payload = {
+                data: {
+                    email: email,
+                    timestamp: new Date().toISOString()
+                }
+            };
+    
+            try {
+                const response = await fetch('https://sheetdb.io/api/v1/jrm6ij0st6ofd', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+    
+                if (response.ok) {
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    document.getElementById('email').value = '';
+                    setTimeout(() => {
+                        document.getElementById('emailForm').style.display = 'none';
+                    }, 3000);
+                } else {
+                    alert('Something went wrong. Try again.');
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert('Network error. Please try again.');
+            }
+        });
+    
+        // Smooth scrolling
+        function scrollToSignup() {
+            document.getElementById('signup').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function scrollToDemo() {
+            document.getElementById('demo').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        // Add some interactive effects on scroll
+        window.addEventListener('scroll', function() {
+            const scrolled = window.pageYOffset;
+            const parallax = document.querySelector('.matrix-bg');
+            if (parallax) {
+                parallax.style.transform = `translateY(${scrolled * 0.2}px)`;
+            }
+        });
+        
+        // Add random glitch effect
+        setInterval(() => {
+            const glitchElements = document.querySelectorAll('.glitch');
+            glitchElements.forEach(el => {
+                if (Math.random() < 0.1) {
+                    el.style.animation = 'none';
+                    setTimeout(() => {
+                        el.style.animation = '';
+                    }, 200);
+                }
+            });
+        }, 3000);
+    </script>    
+</body>
+</html>
